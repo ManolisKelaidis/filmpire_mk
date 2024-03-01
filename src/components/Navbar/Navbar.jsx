@@ -24,7 +24,7 @@ const Navbar = () => {
             color="inherit"
             edge="start"
             style={{ outline: 'none' }}
-            onClick={() => {}}
+            onClick={() => setmobileOpen((preMobileOpen) => !preMobileOpen)}
             className={classes.menuButton}
           >
             <Menu />
@@ -33,7 +33,7 @@ const Navbar = () => {
           <IconButton color="inherit" sx={{ ml: 1 }} onClick={() => {}}>
             {theme.palette.mode === 'dark' ? <Brightness7 /> : <Brightness4 />}
           </IconButton>
-
+          {!isMobile && 'Search...'}
           <div>
             {!isAuthenticated ? (
               <Button color="inherit" onClick={() => {}}>
@@ -48,7 +48,6 @@ const Navbar = () => {
                 </Button>
               )}
           </div>
-          {!isMobile && 'Search...'}
 
         </Toolbar>
       </AppBar>
@@ -58,10 +57,11 @@ const Navbar = () => {
           {isMobile ? (
             <Drawer
               variant="temporary"
-              anchor="left"
+              anchor="right"
               open={mobileOpen}
               classes={{ paper: classes.drawerPaper }}
               ModalProps={{ keepMounted: true }}
+              onClose={() => setmobileOpen((preMobileOpen) => !preMobileOpen)}
             >
               <SideBar setmobileOpen={setmobileOpen} />
             </Drawer>
