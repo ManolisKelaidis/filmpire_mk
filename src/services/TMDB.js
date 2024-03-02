@@ -13,14 +13,20 @@ export const tmdbApi = createApi({
     }),
     // Get Movies by [TYPE]
     getMovies: builder.query({
-      query: ({ genreIdOrCategoryName, page }) => {
-        console.log(genreIdOrCategoryName, page);
+      query: ({ genreIdOrCategoryName, page, searchQuery }) => {
+        console.log(genreIdOrCategoryName);
+        console.log(genreIdOrCategoryName, page, searchQuery);
+        // Get search query
+
+        if (searchQuery) {
+          return `/search/movie?query=${searchQuery}&page=${page}&api_key=${tmdbApiKey}`;
+        }
         // Get movues by category
         if (genreIdOrCategoryName && typeof (genreIdOrCategoryName) === 'string') {
           console.log(genreIdOrCategoryName);
           return `movie/${genreIdOrCategoryName}?page=${page}&api_key=${tmdbApiKey}`;
         }
-
+        // get Movies bu genre
         if (genreIdOrCategoryName && typeof genreIdOrCategoryName === 'number') {
           console.log('here2');
           return `discover/movie?with_genres=${genreIdOrCategoryName}?page=${page}&api_key=${tmdbApiKey}`;
