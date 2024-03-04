@@ -11,7 +11,7 @@ const Movie = ({ movie, i }) => {
   return (
     <Grid item xs={12} sm={6} lg={3} xl={2} className={classes.movie}>
       <Grow in key={i} timeout={(i + 1 * 2000)}>
-        <Link className={classes.links} to={`/movie/${movie.id}`}>
+        <Link className={classes.links} to={`/movies/${movie.id}`}>
           <img
             alt={movie.title}
             className={classes.image}
