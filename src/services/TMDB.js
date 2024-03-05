@@ -19,7 +19,6 @@ export const tmdbApi = createApi({
         }
         // Get movues by category
         if (genreIdOrCategoryName && typeof (genreIdOrCategoryName) === 'string') {
-          console.log(genreIdOrCategoryName);
           return `movie/${genreIdOrCategoryName}?page=${page}&api_key=${tmdbApiKey}`;
         }
         // get Movies bu genre
@@ -37,10 +36,22 @@ export const tmdbApi = createApi({
 
       query: (id) => `/movie/${id}?append_to_response=videos,credits&api_key=${tmdbApiKey}`,
     }),
+    getMovieRecommendations: builder.query({
+      query: ({ list, movie_id }) => `movie/${movie_id}/${list}?api_key=${tmdbApiKey}`,
+    }),
+    getActorDetails: builder.query({
+      query: (actor_id) => `person/${actor_id}?api_key=${tmdbApiKey}`,
+    }),
+    getMoviesByActorId: builder.query({
+      query: ({ id, page }) => `/discover/movie?with_cast=${id}&page=${page}&api_key=${tmdbApiKey}`,
+    }),
   }),
 });
 
 export const {
+  useGetMoviesByActorIdQuery,
+  useGetActorDetailsQuery,
+  useGetMovieRecommendationsQuery,
   useGetMovieQuery,
   useGetMoviesQuery,
   useGetGenresQuery,
