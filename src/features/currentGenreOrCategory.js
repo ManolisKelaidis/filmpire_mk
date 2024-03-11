@@ -9,6 +9,7 @@ export const genreOrCategory = createSlice({
   },
   reducers: {
     selectGenreOrCategory: (state, action) => {
+      console.log('eimai edw', action.payload);
       state.genreIdOrCategoryName = action.payload;
       state.searchQuery = '';
     },
